@@ -1,5 +1,11 @@
+import { SignInPage } from "./pages/SignInPage";
+
 function App() {
-  return <div>Hello world!</div>;
+  return (
+    <div>
+      <SignInPage />
+    </div>
+  );
 }
 
 export default App;
