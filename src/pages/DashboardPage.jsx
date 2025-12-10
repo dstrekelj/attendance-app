@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AttendanceForm } from "../components/AttendanceForm";
-import { DateTime } from "../components/DateTime";
+import { ItemList } from "../components/ItemList";
 
 export function DashboardPage() {
   const [items, setItems] = useState([]);
@@ -12,44 +12,28 @@ export function DashboardPage() {
     ]);
   };
 
+  const handleItemUpdate = (createdAt) => {
+    setItems(
+      items.map((item) =>
+        item.createdAt === createdAt
+          ? { ...item, present: !item.present }
+          : item
+      )
+    );
+  };
+
+  const handleItemDelete = (createdAt) => {
+    setItems(items.filter((item) => item.createdAt !== createdAt));
+  };
+
   return (
     <div>
       <AttendanceForm onSubmit={handleSubmit} />
-      <ul>
-        {items.map((item, index) => (
-          <li key={index}>
-            <span>
-              {item.firstName} {item.lastName}
-            </span>
-            <span>
-              <DateTime value={item.createdAt} />
-            </span>
-            <span>
-              <input
-                type="checkbox"
-                checked={item.present}
-                onChange={() => {
-                  setItems(
-                    items.map((it) =>
-                      item.createdAt === it.createdAt
-                        ? { ...it, present: !it.present }
-                        : it
-                    )
-                  );
-                }}
-              />{" "}
-              Present
-            </span>
-            <button
-              onClick={() => {
-                setItems(items.filter((it) => it.createdAt !== item.createdAt));
-              }}
-            >
-              X
-            </button>
-          </li>
-        ))}
-      </ul>
+      <ItemList
+        items={items}
+        onItemUpdate={handleItemUpdate}
+        onItemDelete={handleItemDelete}
+      />
     </div>
   );
 }
