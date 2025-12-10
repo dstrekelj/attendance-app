@@ -1,9 +1,23 @@
+import { useContext, useEffect } from "react";
 import { SignInForm } from "../components/SignInForm";
+import { AuthContext } from "../contexts/AuthContext";
 
 export function SignInPage() {
+  const { user, signIn } = useContext(AuthContext);
+
+  console.log("marker");
+
   const handleSignIn = (email, password) => {
-    console.log("Signing in with", email, password);
+    signIn(email, password);
+    console.log("handleSignIn called");
   };
+
+  useEffect(() => {
+    if (!user) return;
+
+    console.log("test");
+  }, [user]);
+  [];
 
   return (
     <div>

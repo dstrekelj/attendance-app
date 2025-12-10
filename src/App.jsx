@@ -1,9 +1,12 @@
 import { SignInPage } from "./pages/SignInPage";
+import { AuthContextProvider } from "./providers/AuthContextProvider";
 
 function App() {
   return (
     <div>
-      <SignInPage />
+      <AuthContextProvider>
+        <SignInPage />
+      </AuthContextProvider>
     </div>
   );
 }
