@@ -24,20 +24,29 @@ export function DashboardPage() {
             <span>
               <DateTime value={item.createdAt} />
             </span>
-            <input
-              type="checkbox"
-              checked={item.present}
-              onChange={() => {
-                setItems(
-                  items.map((it) =>
-                    item.createdAt === it.createdAt
-                      ? { ...it, present: !it.present }
-                      : it
-                  )
-                );
+            <span>
+              <input
+                type="checkbox"
+                checked={item.present}
+                onChange={() => {
+                  setItems(
+                    items.map((it) =>
+                      item.createdAt === it.createdAt
+                        ? { ...it, present: !it.present }
+                        : it
+                    )
+                  );
+                }}
+              />{" "}
+              Present
+            </span>
+            <button
+              onClick={() => {
+                setItems(items.filter((it) => it.createdAt !== item.createdAt));
               }}
-            />{" "}
-            Present
+            >
+              X
+            </button>
           </li>
         ))}
       </ul>
