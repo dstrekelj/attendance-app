@@ -1,11 +1,11 @@
-import { SignInPage } from "./pages/SignInPage";
+import { Router } from "./pages/Router";
 import { AuthContextProvider } from "./providers/AuthContextProvider";
 
 function App() {
   return (
     <div>
       <AuthContextProvider>
-        <SignInPage />
+        <Router />
       </AuthContextProvider>
     </div>
   );
