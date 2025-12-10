@@ -5,8 +5,11 @@ import { DateTime } from "../components/DateTime";
 export function DashboardPage() {
   const [items, setItems] = useState([]);
 
-  const handleSubmit = (firstName, lastName) => {
-    setItems([...items, { firstName, lastName, createdAt: Date.now() }]);
+  const handleSubmit = (firstName, lastName, present) => {
+    setItems([
+      ...items,
+      { firstName, lastName, createdAt: Date.now(), present },
+    ]);
   };
 
   return (
@@ -15,7 +18,26 @@ export function DashboardPage() {
       <ul>
         {items.map((item, index) => (
           <li key={index}>
-            {item.firstName} {item.lastName} <DateTime value={item.createdAt} />
+            <span>
+              {item.firstName} {item.lastName}
+            </span>
+            <span>
+              <DateTime value={item.createdAt} />
+            </span>
+            <input
+              type="checkbox"
+              checked={item.present}
+              onChange={() => {
+                setItems(
+                  items.map((it) =>
+                    item.createdAt === it.createdAt
+                      ? { ...it, present: !it.present }
+                      : it
+                  )
+                );
+              }}
+            />{" "}
+            Present
           </li>
         ))}
       </ul>
